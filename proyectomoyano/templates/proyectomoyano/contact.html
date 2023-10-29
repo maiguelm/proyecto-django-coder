@@ -1,0 +1,15 @@
+{% extends "base.html" %} 
+
+{% block masthead %}{% endblock masthead %} 
+
+{% block title %} Contacto {% endblock title %} 
+
+{% block mainpage %}
+<section class="page-section" id="contact">
+  <form action="" method="POST">
+    {% csrf_token %} {{formulario}}
+    <button>Enviar</button>
+  </form>
+</section>
+
+{% endblock mainpage %}

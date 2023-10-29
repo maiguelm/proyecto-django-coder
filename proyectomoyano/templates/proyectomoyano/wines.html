@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block masthead %}{% endblock masthead %}
+
+{% block title %}
+Los Vinos
+{% endblock title %}
+
+{% block mainpage %}
+<form action="" method='POST'>
+	{% csrf_token %}
+
+	{{formulario}}
+	<button>Enviar</button>
+
+	<p>Si querés buscar un vino en especial, hacé click <a href={% url "busquedavinos" %}>acá!</a></p>
+
+</form>
+
+
+{% endblock mainpage %}
