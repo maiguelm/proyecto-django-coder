@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.db.models import Q
 from proyectomoyano.models import Contacto, Vino, Whisky
 from proyectomoyano.forms import BuscarVino, ContactForm, CrearVinoForm, CrearWhiskyForm, BuscarWhisky
@@ -23,7 +23,7 @@ def wines(request):
 
             cons_form = Vino(etiqueta=etiqueta, varietal=varietal, cosecha=cosecha, descripcion=descripcion, tipo=tipo)
             cons_form.save()
-            
+            return redirect('busquedavinos')
         else:
             return render(request, 'proyectomoyano/wines.html', {'formulario': formulario})
             
