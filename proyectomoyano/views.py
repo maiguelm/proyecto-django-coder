@@ -30,26 +30,26 @@ def wines(request):
     formulario = CrearVinoForm()
     return render(request, 'proyectomoyano/wines.html', {'formulario': formulario})
 
-# def buscarVinos(request):
-#     formulario = BuscarVino(request.GET)
-#     if formulario.is_valid():
-#         vino_buscado = formulario.cleaned_data.get('etiqueta')
-#         resultado_busqueda = Vino.objects.filter(etiqueta__icontains=vino_buscado)
-    
-#     formulario = BuscarVino()
-#     return render(request, 'proyectomoyano/busquedavinos.html', {'formulario': formulario, 'resultadobusqueda': resultado_busqueda})
-
-
 def buscarVinos(request):
     formulario = BuscarVino(request.GET)
-    busqueda_vino = request.GET.get("etiqueta")
-
-    if busqueda_vino:
-        listado_de_vinos = Vino.objects.filter(etiqueta__icontains=busqueda_vino)
-    else:
-        listado_de_vinos = Vino.objects.all()
-
+    if formulario.is_valid():
+        vino_buscado = formulario.cleaned_data.get('etiqueta')
+        listado_de_vinos = Vino.objects.filter(etiqueta__icontains=vino_buscado)
+    
+    formulario = BuscarVino()
     return render(request, 'proyectomoyano/busquedavinos.html', {'formulario': formulario, 'listado_de_vinos': listado_de_vinos})
+
+
+# def buscarVinos(request):
+#     formulario = BuscarVino(request.GET)
+#     busqueda_vino = request.GET.get("etiqueta")
+
+#     if busqueda_vino:
+#         listado_de_vinos = Vino.objects.filter(etiqueta__icontains=busqueda_vino)
+#     else:
+#         listado_de_vinos = Vino.objects.all()
+
+#     return render(request, 'proyectomoyano/busquedavinos.html', {'formulario': formulario, 'listado_de_vinos': listado_de_vinos})
 
 
 def whiskies(request):
