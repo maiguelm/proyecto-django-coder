@@ -8,24 +8,27 @@ Buscá tu vino!!
 
 {% block mainpage %}
 
-<form action="">
-	{% comment %} <label>Ingrese la etiqueta a buscar: </label> {% endcomment %}
-	{% comment %} <input type="text" name="vino"> {% endcomment %}
+<h2>Encuentre aquí el vino que desea comentar</h2>
+<form action="" enctype='multipart/form-data'>
+
 	{{formulario}}
 	<input type="submit" value="Buscar">
 </form>
 
 {% if listado_de_vinos %}
-	<ul>
+	<ul  class='ul-flex'>
 		{% for etiqueta in listado_de_vinos %}
-		<li>
-			{{etiqueta}}
+		<li class='link-flex'>
+			{{etiqueta}} <a class='link-special' href={% url "delete_wines" etiqueta.id %}>Eliminar</a> - <a class='link-special' href={% url "update_wine" etiqueta.id %}>Actualizar</a> - <a class='link-special' href={% url "detail_wine" etiqueta.id %}>Descripcion</a>
 		</li>
+
 		{% endfor %}
 	</ul>
 {% else %}
 	<p>No hay Vinos registrados con esos parámetros</p>
 {% endif %}
+
+<p>Si querés dejarnos tu opinión sobre un vino en particular, hacé click <span class=><a class='link-special' href={% url "wines" %}>acá!</a></span></p>
 
 
 {% endblock mainpage %}

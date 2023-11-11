@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block masthead %}{% endblock masthead %}
+
+{% block title %}
+Detalles de Vinos: {{whisky.id}}
+{% endblock title %} 
+
+{% block mainpage %}
+
+<h2>Este es el detalle del Vino seleccionado - {{whisky.id}}</h2>
+
+<ul>
+    <li>Etiqueta: {{whisky.etiqueta}}</li>
+    <li>Añejamiento: {{whisky.aniejamiento}}</li>
+    <li>Tipo: {{whisky.tipo}}</li>
+    <li>Descripcion: {{whisky.descripcion | safe }}</li>
+    <li>
+        {% if whisky.imagen %}
+        Imagen: {{whisky.imagen}}</li>
+        {% else %}
+        Imagen: No hay imagen cargada
+        {% endif %}
+    
+    <li>
+        {% if whisky.fecha_compra %}
+        Fecha de compra: {{whisky.fecha_compra | date:'d-m-Y'}}</li>
+        {% else %}
+        Fecha de Compra: Sin datos
+        {% endif %}
+    </li>
+</ul>
+</form>
+
+
+{% endblock mainpage %}
+

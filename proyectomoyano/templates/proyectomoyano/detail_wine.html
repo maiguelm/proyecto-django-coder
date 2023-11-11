@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block masthead %}{% endblock masthead %}
+
+{% block title %}
+Detalles de Vinos: {{vino.id}}
+{% endblock title %} 
+
+{% block mainpage %}
+
+<h2>Este es el detalle del Vino seleccionado - {{vino.id}}</h2>
+
+<ul>
+    <li>Etiqueta: {{vino.etiqueta}}</li>
+    <li>Varietal: {{vino.varietal}}</li>
+    <li>Cosecha: {{vino.cosecha}}</li>
+    <li>Tipo: {{vino.tipo}}</li>
+    <li>Descripcion: {{vino.descripcion | safe }}</li>
+    <li>
+        {% if vino.imagen %}
+        Imagen: {{vino.imagen}}</li>
+        {% else %}
+        Imagen: No hay imagen cargada
+        {% endif %}
+    
+    <li>
+        {% if vino.fecha_compra %}
+        Fecha de compra: {{vino.fecha_compra | date:'d-m-Y'}}</li>
+        {% else %}
+        Fecha de Compra: Sin datos
+        {% endif %}
+    </li>
+</ul>
+</form>
+
+
+{% endblock mainpage %}
+

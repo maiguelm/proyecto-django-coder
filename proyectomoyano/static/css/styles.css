@@ -10836,7 +10836,13 @@ body {
 
 .page-section {
   padding: 8rem 0;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
 }
+
 
 .text-white-75 {
   color: rgba(255, 255, 255, 0.75) !important;
@@ -10996,4 +11002,28 @@ header.masthead h1, header.masthead .h1 {
 .iconosredes{
   color: black;
   padding: 1rem;
+}
+.formulario{
+  display: flex;
+  flex-direction: column;
+   justify-content: center;
+  align-items: center;;
+}
+.boton{
+  margin: 0 auto;
+  max-width: 10rem;
+}
+.link-special{
+  color: #000;
+  padding-left: 8px;
+}
+.ul-flex{
+  margin: 0 auto;
+  padding: 10px;
+}
+.link-flex{
+  margin: 2rem 0;
+  background-color: #13653f;
+  display:flex;
+  justify-content: space-evenly;
 }

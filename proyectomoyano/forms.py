@@ -7,20 +7,14 @@ class ContactForm(forms.Form):
     consulta = forms.CharField(widget=forms.Textarea(attrs={'cols': 40, 'rows': 5}))
     
 class CrearVinoForm(forms.Form):
-    etiqueta = forms.CharField(max_length=30)
-    varietal = forms.CharField(max_length=30)
-    cosecha = forms.IntegerField()
+    etiqueta = forms.CharField(max_length=30, widget=forms.TextInput(attrs={'placeholder': 'Ingrese la etiqueta'}))
+    varietal = forms.CharField(max_length=30, widget=forms.TextInput(attrs={'placeholder': 'Ingrese el varietal'}))
+    cosecha = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'Ingrese el año'}))
     tipo = forms.ChoiceField(choices=[('vino_tinto', 'Vino Tinto'),('vino_blanco', 'Vino Blanco'),('vino_rosado', 'Vino Rosado')])
     descripcion = forms.CharField(widget=forms.Textarea(attrs={'cols': 40, 'rows': 5}))
+    imagen = forms.ImageField(required=False)
+    fecha_compra = forms.DateField(required=False,widget=forms.DateInput(attrs={'type': 'date'}), input_formats=['%d-%m-%Y'])
     
-class CrearWhiskyForm(forms.Form):
-    etiqueta = forms.CharField(max_length=30)
-    aniejamiento = forms.CharField(max_length=30)
-    tipo = forms.ChoiceField(choices=[('whisky', 'Whisky'),('bourbon', 'Bourbon'),('otros', 'Otros')])
-    descripcion = forms.CharField(widget=forms.Textarea(attrs={'cols': 40, 'rows': 5}))
-
 class BuscarVino(forms.Form):
     etiqueta = forms.CharField(max_length=30, required=False)
 
-class BuscarWhisky(forms.Form):
-    etiqueta = forms.CharField(max_length=30, required=False)

@@ -14,10 +14,10 @@
         <!-- Google fonts-->
         <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="{% static "css\styles.css" %}" rel="stylesheet" />
         <!-- SimpleLightbox plugin CSS-->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="{% static "css/styles.css" %}" rel="stylesheet" />
 
     </head>
     <body id="page-top">
@@ -29,8 +29,8 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto my-2 my-lg-0">
                         <li class="nav-item"><a class="nav-link" href={% url "about" %}>Sobre Nosotros</a></li>
-                        <li class="nav-item"><a class="nav-link" href={% url "wines" %}>Vinos</a></li>
-                        <li class="nav-item"><a class="nav-link" href={% url "whiskies" %}>Whiskies</a></li>
+                        <li class="nav-item"><a class="nav-link" href={% url "busquedavinos" %}>Vinos</a></li>
+                        <li class="nav-item"><a class="nav-link" href={% url "find_whisky" %}>Whiskies</a></li>
                         <li class="nav-item"><a class="nav-link" href={% url "contact" %}>Contacto</a></li>
                     </ul>
                 </div>
@@ -55,12 +55,11 @@
         {% endblock masthead %}
 
         <section class="page-section bg-primary" id="about">
+            {% block mainpage %}
+            
+            {% endblock mainpage %}
         </section>
-
-        {% block mainpage %}
-
-        {% endblock mainpage %}
-
+            
 
         <!-- Footer-->
         <footer class="bg-light py-5">

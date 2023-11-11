@@ -7,11 +7,12 @@ Los Whiskys
 {% endblock title %}
 
 {% block mainpage %}
-<section class="page-section" id="wines"> 
-	<form action="" method='POST'>
+
+<section class="page-section" id="whiskies"> 
+	<form class='formulario' action={% url "whiskies" %} method='POST'>
 		{% csrf_token %}
 		
-		{{formulario}}
+		{{form}}
 		<button>Enviar</button>
 		
 	</form>

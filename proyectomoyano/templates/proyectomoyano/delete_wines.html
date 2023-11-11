@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block masthead %}{% endblock masthead %}
+
+{% block title %}
+Eliminar Vinos
+{% endblock title %} 
+
+{% block mainpage %}
+
+<h2>Elimine el vino deseado de la base de datos</h2>
+
+<form action="" method="POST">
+    {% csrf_token %}
+    Esta seguro de elminar {{vino.etiqueta}} - {{vino.varietal}} - {{vino.cosecha}}?
+    <input type="submit" value="Confirmar">
+</form>
+
+
+{% endblock mainpage %}
+

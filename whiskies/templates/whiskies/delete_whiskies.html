@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block masthead %}{% endblock masthead %}
+
+{% block title %}
+Eliminar Whisky
+{% endblock title %} 
+
+{% block mainpage %}
+
+<h2>Elimine el Whisky {{whisky.etiqueta}}  {{whisky.aniejamiento}} de la base de datos</h2>
+
+<form action="" method="POST">
+    {% csrf_token %}
+    Esta seguro de elminar {{whisky.etiqueta}} - {{whisky.aniejamiento}} - {{whisky.tipo}}?
+    <input type="submit" value="Confirmar">
+</form>
+
+
+{% endblock mainpage %}
+

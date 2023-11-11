@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block masthead %}{% endblock masthead %}
+
+{% block title %}
+Buscá tu whisky!!
+{% endblock title %} 
+
+{% block mainpage %}
+
+<h2>Encuentre aquí el whisky que desea comentar</h2>
+<form action="" enctype='multipart/form-data'>
+
+	<input type="text" name="etiqueta" placeholder="Whisky a buscar">
+	<input type="submit" value="Buscar">
+</form>
+
+{% if listado_de_whisky %}
+	<ul  class='ul-flex'>
+		{% for etiqueta in listado_de_whisky %}
+		<li class='link-flex'>
+			{{etiqueta}} <a class='link-special' href={% url "delete_whiskies" etiqueta.id %}>Eliminar</a> - <a class='link-special' href={% url "update_whiskies" etiqueta.id %}>Actualizar</a> - <a class='link-special' href={% url "detail_whiskies" etiqueta.id %}>Descripcion</a>
+		</li>
+
+		{% endfor %}
+	</ul>
+{% else %}
+	<p>No hay Whiskies registrados con esos parámetros</p>
+{% endif %}
+
+<p>Si querés dejarnos tu opinión sobre un Whisky en particular, hacé click <span class=><a class='link-special' href={% url "whiskies" %}>acá!</a></span></p>
+
+
+{% endblock mainpage %}

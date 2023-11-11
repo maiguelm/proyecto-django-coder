@@ -7,15 +7,16 @@ Los Vinos
 {% endblock title %}
 
 {% block mainpage %}
-<form action="" method='POST'>
-	{% csrf_token %}
 
-	{{formulario}}
-	<button>Enviar</button>
+<h3>Los vinos</h3>
+<p>Desde aquí Ud. podrá dejar los comentarios sobre la Etiqueta con la cual se ha deleitado</p>
 
-	<p>Si querés buscar un vino en especial, hacé click <a href={% url "busquedavinos" %}>acá!</a></p>
-
-</form>
-
+<section class="page-section" id="wines"> 
+		<form class='formulario' action={% url "wines" %} method='POST'>
+		{% csrf_token %}
+		{{formulario}}
+		<button class='boton'>Enviar</button>
+		</form>
+</section>
 
 {% endblock mainpage %}

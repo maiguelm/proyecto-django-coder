@@ -6,7 +6,7 @@
 
 {% block mainpage %}
 <section class="page-section" id="contact">
-  <form action="" method="POST">
+  <form class='formulario' action="" method="POST">
     {% csrf_token %} {{formulario}}
     <button>Enviar</button>
   </form>

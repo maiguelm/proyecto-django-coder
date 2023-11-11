@@ -1,7 +1,11 @@
 from django.shortcuts import render, redirect
 from django.db.models import Q
-from proyectomoyano.models import Contacto, Vino, Whisky
-from proyectomoyano.forms import BuscarVino, ContactForm, CrearVinoForm, CrearWhiskyForm, BuscarWhisky
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.detail import DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
+from proyectomoyano.models import Contacto, Vino
+from proyectomoyano.forms import BuscarVino, ContactForm, CrearVinoForm
 
 
 def inicio(request):  
@@ -20,8 +24,10 @@ def wines(request):
             cosecha = data_form.get('cosecha')
             descripcion = (data_form.get('descripcion')).lower()
             tipo = data_form.get('tipo')
+            imagen = data_form.get('imagen')
+            fecha_compra = data_form.get('fecha_compra')
 
-            cons_form = Vino(etiqueta=etiqueta, varietal=varietal, cosecha=cosecha, descripcion=descripcion, tipo=tipo)
+            cons_form = Vino(etiqueta=etiqueta, varietal=varietal, cosecha=cosecha, descripcion=descripcion, tipo=tipo, fecha_compra=fecha_compra)
             cons_form.save()
             return redirect('busquedavinos')
         else:
@@ -39,45 +45,21 @@ def buscarVinos(request):
     formulario = BuscarVino()
     return render(request, 'proyectomoyano/busquedavinos.html', {'formulario': formulario, 'listado_de_vinos': listado_de_vinos})
 
-
-# def buscarVinos(request):
-#     formulario = BuscarVino(request.GET)
-#     busqueda_vino = request.GET.get("etiqueta")
-
-#     if busqueda_vino:
-#         listado_de_vinos = Vino.objects.filter(etiqueta__icontains=busqueda_vino)
-#     else:
-#         listado_de_vinos = Vino.objects.all()
-
-#     return render(request, 'proyectomoyano/busquedavinos.html', {'formulario': formulario, 'listado_de_vinos': listado_de_vinos})
+class UpdateWine(UpdateView):
+    model = Vino
+    template_name = "proyectomoyano/update_wine.html"
+    fields = ['etiqueta', 'varietal', 'cosecha', 'descripcion', 'tipo', 'imagen', 'fecha_compra']
+    success_url = reverse_lazy('busquedavinos')
 
 
-def whiskies(request):
-    if request.method == 'POST':
-       formulario = CrearWhiskyForm(request.POST)
-       if formulario.is_valid():
-           data_form = formulario.cleaned_data
-           etiqueta = (data_form.get('etiqueta')).lower()
-           aniejamiento = data_form.get('aniejamiento')
-           descripcion = (data_form.get('descripcion')).lower()
-           tipo = data_form.get('tipo')
+class DetailWine(DetailView):
+    model = Vino
+    template_name = "proyectomoyano/detail_wine.html"
+class DeletWine(DeleteView):
+    model = Vino
+    template_name = "proyectomoyano/delete_wines.html"
+    success_url = reverse_lazy('busquedavinos')
 
-           cons_form = Whisky(etiqueta=etiqueta, aniejamiento=aniejamiento, descripcion=descripcion, tipo=tipo)
-           cons_form.save()
-       else:
-           return render(request, 'proyectomoyano/whiskies.html', {'formulario': formulario})
-       
-    formulario = CrearWhiskyForm()
-    return render(request, 'proyectomoyano/whiskies.html', {'formulario': formulario})
-
-# def buscarWhisky(request):
-#     busqueda_whisky = request.GET.get("etiqueta")
-#     if busqueda_whisky:
-#         listado_de_whisky = Whisky.objects.filter(etiqueta__icontains=busqueda_whisky)
-#     else:
-#         listado_de_whisky = Whisky.objects.all()
-
-#     return render(request, 'proyectomoyano/busquedavinos.html', {'listado_de_whisky': listado_de_whisky})
 
 def contact(request):
     if request.method == 'POST':

@@ -1,7 +1,17 @@
-{% extends "base.html" %}
+{% extends "base.html" %} 
+{% block masthead %}{% endblock masthead %} 
+{% block title %} Sobre Nosotros {% endblock title %} 
 
-{% block masthead %}{% endblock masthead %}
-
-{% block title %}
-Sobre Nosotros
-{% endblock title %} 
+{% block mainpage %}
+<div class="about">
+  <p>
+    Este sitio ha sido creado por Miguel Angel Moyano como proyecto final del
+    curso de Python en CoderHouse
+  </p>
+  <p>
+    Haga click
+    <button href="https://github.com/maiguelm/proyecto-django-coder">aqui</button> para
+    acceder al repositorio en GitHub
+  </p>
+</div>
+{% endblock mainpage %}

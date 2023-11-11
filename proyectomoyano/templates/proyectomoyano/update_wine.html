@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block masthead %}{% endblock masthead %}
+
+{% block title %}
+Actualizar Vinos
+{% endblock title %} 
+
+{% block mainpage %}
+
+<h2>Actualice los datos del vino seleccionado</h2>
+
+<form action="" method="POST">
+    {% csrf_token %}
+    {{form}}
+    <input type="submit" value="Actualizar">
+</form>
+
+
+{% endblock mainpage %}
+
