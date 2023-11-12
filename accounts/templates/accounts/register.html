@@ -1,0 +1,16 @@
+{% extends "base.html" %} 
+
+{% block masthead %}{% endblock masthead %} 
+
+{% block title %} Registro de usuario {% endblock title %} 
+
+{% block mainpage %}
+<section class="page-section" id="contact">
+  <form class='formulario' action={% url "register" %} method="POST">
+    {% csrf_token %}
+	{{form}}
+    <button>Registrese</button>
+  </form>
+</section>
+
+{% endblock mainpage %}

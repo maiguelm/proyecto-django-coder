@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.db.models import Q
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from proyectomoyano.models import Contacto, Vino
@@ -14,6 +15,7 @@ def inicio(request):
 def about(request):
     return render(request, 'proyectomoyano/about.html', {})
 
+@login_required
 def wines(request):
     if request.method == 'POST':
         formulario = CrearVinoForm(request.POST)
@@ -45,7 +47,7 @@ def buscarVinos(request):
     formulario = BuscarVino()
     return render(request, 'proyectomoyano/busquedavinos.html', {'formulario': formulario, 'listado_de_vinos': listado_de_vinos})
 
-class UpdateWine(UpdateView):
+class UpdateWine(LoginRequiredMixin, UpdateView):
     model = Vino
     template_name = "proyectomoyano/update_wine.html"
     fields = ['etiqueta', 'varietal', 'cosecha', 'descripcion', 'tipo', 'imagen', 'fecha_compra']
@@ -55,7 +57,8 @@ class UpdateWine(UpdateView):
 class DetailWine(DetailView):
     model = Vino
     template_name = "proyectomoyano/detail_wine.html"
-class DeletWine(DeleteView):
+    
+class DeletWine(LoginRequiredMixin, DeleteView):
     model = Vino
     template_name = "proyectomoyano/delete_wines.html"
     success_url = reverse_lazy('busquedavinos')

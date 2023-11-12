@@ -1,0 +1,18 @@
+{% extends "base.html" %} 
+
+{% block masthead %}{% endblock masthead %} 
+
+{% block title %} Iniciar Sesion {% endblock title %} 
+
+{% block mainpage %}
+<section class="page-section" id="contact">
+  <form class='formulario' action={% url "login" %} method="POST">
+    {% csrf_token %}
+	{{formulario}}
+    <button>Iniciar Sesion</button>
+  </form>
+
+  <p>Haga click <a class='link-special' href={% url "register" %} >aqui</a> para registrarse</p>
+</section>
+
+{% endblock mainpage %}
