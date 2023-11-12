@@ -1,3 +1,5 @@
+<!-- proyectomoyano/wines.html -->
+
 {% extends "base.html" %}
 
 {% block masthead %}{% endblock masthead %}
@@ -12,11 +14,13 @@ Los Vinos
 <p>Desde aquí Ud. podrá dejar los comentarios sobre la Etiqueta con la cual se ha deleitado</p>
 
 <section class="page-section" id="wines"> 
-		<form class='formulario' action={% url "wines" %} method='POST'>
+	<form class='formulario' action={% url "wines" %} method='POST' enctype="multipart/form-data">
 		{% csrf_token %}
+		{{formulario.media}}
 		{{formulario}}
 		<button class='boton'>Enviar</button>
-		</form>
+	</form>
+
 </section>
 
 {% endblock mainpage %}

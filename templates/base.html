@@ -34,7 +34,7 @@
                         <li class="nav-item"><a class="nav-link" href={% url "contact" %}>Contacto</a></li>
                         {% if request.user.is_authenticated %}
                         <li class="nav-item"><a class="nav-link" href={% url "logout" %}>Cerrar Sesion</a></li>
-                        <li class="nav-item"><a class="nav-link">Bienvenido {{request.user.username}}!</a></li>
+                        <li class="nav-item"><a class="nav-link" href={% url "profile" pk=user.id %} >Bienvenido {{request.user.username}}!</a></li>
                         {% else %}
                         <li class="nav-item"><a class="nav-link" href={% url "login" %}>Iniciar Sesion</a></li>
                         {% endif %}
@@ -53,9 +53,11 @@
                     </div>
                     <div class="col-lg-8 align-self-baseline">
                         <p class="text-white-75 mb-5">{% block parrMasterhead %}{% endblock parrMasterhead %}</p>
-                        <a class="btn btn-primary btn-xl" href="{% url "wines" %}">Ingresar</a>
                         {% if not request.user.is_authenticated %}
                         <a class="btn btn-primary btn-xl" href={% url "login" %}>Iniciar Sesion</a>
+                        {% else %}
+                        <a class="btn btn-primary btn-xl" href="{% url "wines" %}">Ingresar Opinion</a>
+
                         {% endif %}
                     </div>
                 </div>

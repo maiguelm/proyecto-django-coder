@@ -1,0 +1,18 @@
+{% extends "base.html" %} 
+
+{% block masthead %}{% endblock masthead %} 
+
+{% block title %} Editar el perfil de usuario {% endblock title %} 
+
+{% block mainpage %}
+<section class="page-section" id="contact">
+  <form class='formulario' action="{% url "edit_user" pk=user.id  %}" method="POST" enctype='multipart/form-data'>
+    {% csrf_token %}
+	{{form}}
+    <button>Cambiar datos!</button>
+  </form>
+
+  <p>Haga click <a class='link-special' href={% url "change_password" pk=user.id %} >aqui</a> para Cambiar su contraseña</p>
+</section>
+
+{% endblock mainpage %}

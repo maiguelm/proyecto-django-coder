@@ -11027,3 +11027,6 @@ header.masthead h1, header.masthead .h1 {
   display:flex;
   justify-content: space-evenly;
 }
+.imagen_form{
+  max-height: 10rem;
+}

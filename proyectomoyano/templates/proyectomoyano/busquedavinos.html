@@ -16,20 +16,21 @@ Buscá tu vino!!
 </form>
 
 {% if listado_de_vinos %}
-	<ul  class='ul-flex'>
-		{% for etiqueta in listado_de_vinos %}
-		<li class='link-flex'>
-			{{etiqueta}} <a class='link-special' href={% url "delete_wines" etiqueta.id %}>Eliminar</a> - <a class='link-special' href={% url "update_wine" etiqueta.id %}>Actualizar</a> - <a class='link-special' href={% url "detail_wine" etiqueta.id %}>Descripcion</a>
-		</li>
-
-		{% endfor %}
-	</ul>
+    <ul class='ul-flex'>
+        {% for vino in listado_de_vinos %}
+        <li class='link-flex'>
+            {{ vino.etiqueta }} {{ vino.varietal }} - {{ vino.cosecha }} <a class='link-special' href="{% url 'delete_wines' vino.id %}">Eliminar</a> - <a class='link-special' href="{% url 'update_wine' vino.id %}">Actualizar</a> - <a class='link-special' href="{% url 'detail_wine' vino.id %}">Descripcion</a>
+        </li>
+        {% endfor %}
+    </ul>
 {% else %}
-	<p>No hay Vinos registrados con esos parámetros</p>
+    <p>No hay Vinos registrados con esos parámetros</p>
 {% endif %}
 
-<p>Si querés dejarnos tu opinión sobre un vino en particular, hacé click <span><a class='link-special' href={% url "wines" %}>acá!</a></span></p>
 
 
+{% if  request.user.is_authenticated %}
+	<p>Si querés dejarnos tu opinión sobre un vino en particular, hacé click <span><a class='link-special' href={% url "wines" %}>acá!</a></span></p>
+{% endif %}
 {% endblock mainpage %}
 

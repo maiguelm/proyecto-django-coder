@@ -10,6 +10,7 @@ Detalles de Vinos: {{vino.id}}
 
 <h2>Este es el detalle del Vino seleccionado - {{vino.id}}</h2>
 
+<form class='formulario' action="" enctype="multipart/form-data">
 <ul>
     <li>Etiqueta: {{vino.etiqueta}}</li>
     <li>Varietal: {{vino.varietal}}</li>
@@ -18,7 +19,7 @@ Detalles de Vinos: {{vino.id}}
     <li>Descripcion: {{vino.descripcion | safe }}</li>
     <li>
         {% if vino.imagen %}
-        Imagen: {{vino.imagen}}</li>
+        Imagen: <img class='imagen_form' src={{vino.imagen.url}} alt="Imagen de vino"></img></li>
         {% else %}
         Imagen: No hay imagen cargada
         {% endif %}

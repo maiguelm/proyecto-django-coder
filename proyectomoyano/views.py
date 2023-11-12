@@ -18,7 +18,7 @@ def about(request):
 @login_required
 def wines(request):
     if request.method == 'POST':
-        formulario = CrearVinoForm(request.POST)
+        formulario = CrearVinoForm(request.POST, request.FILES)
         if formulario.is_valid():
             data_form = formulario.cleaned_data
             etiqueta = (data_form.get('etiqueta')).lower()
@@ -29,7 +29,7 @@ def wines(request):
             imagen = data_form.get('imagen')
             fecha_compra = data_form.get('fecha_compra')
 
-            cons_form = Vino(etiqueta=etiqueta, varietal=varietal, cosecha=cosecha, descripcion=descripcion, tipo=tipo, fecha_compra=fecha_compra)
+            cons_form = Vino(etiqueta=etiqueta, varietal=varietal, cosecha=cosecha, descripcion=descripcion, tipo=tipo, fecha_compra=fecha_compra, imagen=imagen)
             cons_form.save()
             return redirect('busquedavinos')
         else:

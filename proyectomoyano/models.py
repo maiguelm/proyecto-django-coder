@@ -1,5 +1,6 @@
 from dataclasses import field
 from django.db import models
+from ckeditor.fields import RichTextField
 
 class Contacto(models.Model):
     nombre = models.CharField(max_length=30)
@@ -16,10 +17,10 @@ class Vino(models.Model):
     etiqueta = models.CharField(max_length=30)
     varietal = models.CharField(max_length=30)
     cosecha = models.IntegerField()
-    descripcion = models.CharField(max_length=120)
+    descripcion = RichTextField()
     tipo = models.CharField(max_length=30, choices=TIPOS,default='vino_tinto')
     fecha_compra = models.DateField(null=True)
-    imagen = models.ImageField(upload_to='avatares', null=True, blank=True)
+    imagen = models.ImageField(upload_to='imagenes', null=True, blank=True)
     
     def __str__(self):
         return f'{self.id} - {self.etiqueta} - {self.descripcion} - {self.cosecha}'

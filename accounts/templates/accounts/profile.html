@@ -1,0 +1,24 @@
+{% extends "base.html" %} 
+
+{% block masthead %}{% endblock masthead %} 
+
+{% block title %} Editar el perfil de usuario {% endblock title %} 
+
+{% block mainpage %}
+<section class="page-section" id="contact">
+
+	<h1>{{ user_profile.user.username }}</h1>
+	<p>Nombre: {{ user_profile.user.first_name }}</p>
+	<p>Apellido: {{ user_profile.user.last_name }}</p>
+	<p>Email: {{ user_profile.user.email }}</p>
+	<p>Fecha de Nacimiento: {{ user_profile.user.fecha_nacimiento}}</p>
+	<p>Lugar de residencia: {{ user_profile.lugar_residencia}}</p>
+	{% if request.user.userprofile.img_profile %}
+	<p>Imagen de Usuario: <img src={{request.user.userprofile.img_profile.url}} alt="Imagen de Usuario" style="max-height: 100px; overflow: auto;"></p>
+	{% endif %}
+	<p>Fecha de registro: {{ user_profile.user.date_joined }}</p>
+
+  <p>Haga click <a class='link-special' href={% url "edit_user" pk=user.id %} >aqui</a> para editar sus datos</p>
+</section>
+
+{% endblock mainpage %}
