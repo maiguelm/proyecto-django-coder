@@ -1,12 +1,18 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import PasswordChangeView
+from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login as user_init
 from django.views import View
 from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
-from accounts.forms import UserRegister, UserEdit
+from accounts.forms import UserRegister, UserEdit, MensajeForm
 from accounts.models import UserProfile
+from mensajes.models import Mensaje
 
 
 def login(request):
@@ -50,15 +56,38 @@ def register(request):
 #     def get_object(self, queryset=None):
 #         return UserProfile.objects.get(user=self.request.user)
 
+@method_decorator(login_required, name='dispatch')
 class Profile(View):
     template_name = 'accounts/profile.html'
 
     def get(self, request, *args, **kwargs):
         user_profile, created = UserProfile.objects.get_or_create(user=request.user)
+        ultimos_mensajes = Mensaje.objects.all().order_by('-fecha_creacion')[:8]
+        form = MensajeForm()  # Inicializar el formulario vacío
 
-        context = {'user_profile': user_profile}
+        context = {'user_profile': user_profile, 'ultimos_mensajes': ultimos_mensajes, 'form': form}
         return render(request, self.template_name, context)
 
+    def post(self, request, *args, **kwargs):
+        user_profile, created = UserProfile.objects.get_or_create(user=request.user)
+        form = MensajeForm(request.POST)
+
+        if form.is_valid():
+            contenido = form.cleaned_data['contenido']
+            remitente = request.user
+            destinatario = form.cleaned_data['destinatario']
+
+            mensaje = Mensaje.objects.create(contenido=contenido, remitente=remitente, destinatario=destinatario)
+
+            # Obtener los últimos mensajes después de crear el nuevo mensaje
+            ultimos_mensajes = Mensaje.objects.filter(destinatario=request.user).order_by('-fecha_creacion')[:8]
+
+            return HttpResponseRedirect(reverse('profile', kwargs={'pk': request.user.id}))
+
+        # Si el formulario no es válido, actualiza el contexto y renderiza la página
+        context = {'user_profile': user_profile, 'form': form}
+        return render(request, self.template_name, context)
+       
     
 # def editUser(request, pk):
 #     form = UserEdit(instance=request.user)
@@ -73,7 +102,7 @@ class Profile(View):
 def editUser(request, pk):
     user_extra = request.user.userprofile
     user = request.user
-    form = UserEdit(initial={'lugar_residencia': user_extra.lugar_residencia, 'img_profile': user_extra.img_profile}, instance=request.user)
+    form = UserEdit(initial={'lugar_residencia': user_extra.lugar_residencia, 'img_profile': user_extra.img_profile, 'fecha_nacimiento':user_extra.fecha_nacimiento}, instance=request.user)
 
     if request.method == 'POST':
         form = UserEdit(request.POST, request.FILES, instance=user)
@@ -81,11 +110,15 @@ def editUser(request, pk):
         if form.is_valid():
             lugar_residencia = form.cleaned_data.get('lugar_residencia')
             new_img_profile = form.cleaned_data.get('img_profile')
+            new_fecha_nacimiento = form.cleaned_data['fecha_nacimiento']
+
             
             if lugar_residencia:
                 user_extra.lugar_residencia = lugar_residencia
             if new_img_profile:
                 user_extra.img_profile = new_img_profile
+            if new_fecha_nacimiento:
+                user_extra.fecha_nacimiento = new_fecha_nacimiento
             
             user_extra.save()
             form.save()

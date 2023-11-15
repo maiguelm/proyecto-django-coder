@@ -19,6 +19,11 @@ Buscá tu whisky!!
 	<ul  class='ul-flex'>
 		{% for etiqueta in listado_de_whisky %}
 		<li class='link-flex'>
+			{% if etiqueta.imagen %}
+            <img class='imagen_list' src={{etiqueta.imagen.url}} alt="Imagen de whisky"></img>
+            {% else %}
+            <img src="" alt=""></img>
+            {% endif %} - 
 			{{etiqueta}} <a class='link-special' href={% url "delete_whiskies" etiqueta.id %}>Eliminar</a> - <a class='link-special' href={% url "update_whiskies" etiqueta.id %}>Actualizar</a> - <a class='link-special' href={% url "detail_whiskies" etiqueta.id %}>Descripcion</a>
 		</li>
 

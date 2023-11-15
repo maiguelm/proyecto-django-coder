@@ -11,12 +11,36 @@
 	<p>Nombre: {{ user_profile.user.first_name }}</p>
 	<p>Apellido: {{ user_profile.user.last_name }}</p>
 	<p>Email: {{ user_profile.user.email }}</p>
-	<p>Fecha de Nacimiento: {{ user_profile.user.fecha_nacimiento}}</p>
-	<p>Lugar de residencia: {{ user_profile.lugar_residencia}}</p>
+	<p>Fecha de Nacimiento: {{ user_profile.fecha_nacimiento | date:"d-m-Y" }}</p>
+	<p>Lugar de residencia: {{ user_profile.lugar_residencia }}</p>
 	{% if request.user.userprofile.img_profile %}
 	<p>Imagen de Usuario: <img src={{request.user.userprofile.img_profile.url}} alt="Imagen de Usuario" style="max-height: 100px; overflow: auto;"></p>
 	{% endif %}
-	<p>Fecha de registro: {{ user_profile.user.date_joined }}</p>
+	<p>Fecha de registro: {{ user_profile.user.date_joined | date:"d-m-Y, g:iA" }}</p>
+
+<h3>Últimos 8 Mensajes</h3>
+  <ul>
+    {% for mensaje in ultimos_mensajes %}
+      <li>{{ mensaje.remitente }}: {{ mensaje.contenido }} - {{ mensaje.destinatario.username }} - {{ mensaje.fecha_creacion | date:"d-m-Y, g:iA" }}</li>
+    {% endfor %}
+  </ul>
+
+{% for destinatario in destinatarios %}
+	<a href="{% url 'mensajes:ver_conversacion' destinatario_id=user_profile.user.id %}">Ver Conversación con {{ user_profile.user.username }}</a>
+{% endfor %}
+
+
+  <h3><a class='link-special' href="{% url 'mensajes:ver_todos_los_mensajes' %}">Ver Todos los Mensajes</a></h3>
+
+
+
+  <h2>Enviar Mensaje</h2>
+  <form method="POST" action="{% url 'profile' pk=request.user.id %}">
+	  {% csrf_token %}
+	  {{ form.destinatario.label_tag }} {{ form.destinatario }}
+	  {{ form.contenido.label_tag }} {{ form.contenido }}
+	  <button type="submit">Enviar Mensaje</button>
+  </form>
 
   <p>Haga click <a class='link-special' href={% url "edit_user" pk=user.id %} >aqui</a> para editar sus datos</p>
 </section>

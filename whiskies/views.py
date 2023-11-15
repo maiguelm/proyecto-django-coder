@@ -21,14 +21,14 @@ class Whiskies(ListView):
         return listado_de_whisky
 
 
-class CreateWhisky(CreateView):
+class CreateWhisky(LoginRequiredMixin, CreateView):
     model = Whisky
     template_name = "whiskies/whiskies.html"
     fields = ['etiqueta', 'aniejamiento', 'descripcion', 'tipo', 'fecha_compra', 'imagen']
     success_url = reverse_lazy('find_whisky')
 
 
-class UpdateWhisky(UpdateView):
+class UpdateWhisky(LoginRequiredMixin, UpdateView):
     model = Whisky
     template_name = "whiskies/update_whiskies.html"
     fields = ['etiqueta', 'aniejamiento', 'descripcion', 'tipo', 'fecha_compra', 'imagen']
@@ -39,7 +39,7 @@ class DetailWhisky(DetailView):
     template_name = "whiskies/detail_whiskies.html"
 
 
-class DeleteWhisky(DeleteView):
+class DeleteWhisky(LoginRequiredMixin, DeleteView):
     model = Whisky
     template_name = "whiskies/delete_wiskies.html"
     success_url = reverse_lazy('find_whisky')

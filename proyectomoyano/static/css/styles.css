@@ -11030,3 +11030,6 @@ header.masthead h1, header.masthead .h1 {
 .imagen_form{
   max-height: 10rem;
 }
+.imagen_list{
+  max-height: 50px;
+}

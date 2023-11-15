@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block masthead %}{% endblock masthead %} 
+{% block title %}Todos los Mensajes{% endblock title %}
+
+{% block mainpage %}
+  <h2>Todos los Mensajes</h2>
+  <ul>
+    {% for mensaje in mensajes_pagina %}
+      <li>{{ mensaje.remitente }}: {{ mensaje.contenido }}</li>
+    {% endfor %}
+  </ul>
+
+  <div class="pagination">
+    <span class="step-links">
+        {% if mensajes_pagina.has_previous %}
+            <a class='link-special' ref="?page=1">&laquo; primera</a>
+            <a class='link-special' href="?page={{ mensajes_pagina.previous_page_number }}">previa</a>
+        {% endif %}
+
+        <span class="current">
+            Página {{ mensajes_pagina.number }} de {{ mensajes_pagina.paginator.num_pages }}.
+        </span>
+
+        {% if mensajes_pagina.has_next %}
+            <a class='link-special' href="?page={{ mensajes_pagina.next_page_number }}">siguiente</a>
+            <a class='link-special' href="?page={{ mensajes_pagina.paginator.num_pages }}">ultima &raquo;</a>
+        {% endif %}
+    </span>
+  </div>
+{% endblock mainpage %}

@@ -3,12 +3,12 @@
 {% block masthead %}{% endblock masthead %}
 
 {% block title %}
-Detalles de Vinos: {{whisky.id}}
+Detalles de Whisky: {{whisky.id}}
 {% endblock title %} 
 
 {% block mainpage %}
 
-<h2>Este es el detalle del Vino seleccionado - {{whisky.id}}</h2>
+<h2>Este es el detalle del Whisky seleccionado - {{whisky.id}}</h2>
 
 <ul>
     <li>Etiqueta: {{whisky.etiqueta}}</li>
@@ -17,14 +17,14 @@ Detalles de Vinos: {{whisky.id}}
     <li>Descripcion: {{whisky.descripcion | safe }}</li>
     <li>
         {% if whisky.imagen %}
-        Imagen: {{whisky.imagen}}</li>
+        Imagen: <img class='imagen_form' src={{whisky.imagen.url}} alt="Imagen de whisky"></img>
         {% else %}
         Imagen: No hay imagen cargada
         {% endif %}
-    
+    </li>
     <li>
         {% if whisky.fecha_compra %}
-        Fecha de compra: {{whisky.fecha_compra | date:'d-m-Y'}}</li>
+        Fecha de compra: {{whisky.fecha_compra | date:'d-m-Y'}}
         {% else %}
         Fecha de Compra: Sin datos
         {% endif %}

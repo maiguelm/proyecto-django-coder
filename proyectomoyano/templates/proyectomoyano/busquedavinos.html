@@ -19,6 +19,11 @@ Buscá tu vino!!
     <ul class='ul-flex'>
         {% for vino in listado_de_vinos %}
         <li class='link-flex'>
+            {% if vino.imagen %}
+            <img class='imagen_list' src={{vino.imagen.url}} alt="Imagen de vino"></img>
+            {% else %}
+            <img src="" alt=""></img>
+            {% endif %} - 
             {{ vino.etiqueta }} {{ vino.varietal }} - {{ vino.cosecha }} <a class='link-special' href="{% url 'delete_wines' vino.id %}">Eliminar</a> - <a class='link-special' href="{% url 'update_wine' vino.id %}">Actualizar</a> - <a class='link-special' href="{% url 'detail_wine' vino.id %}">Descripcion</a>
         </li>
         {% endfor %}

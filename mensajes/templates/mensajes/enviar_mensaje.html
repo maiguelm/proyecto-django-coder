@@ -1,0 +1,14 @@
+{% extends "base.html" %} 
+{% block masthead %}{% endblock masthead %} 
+{% block title %} Enviar Mensajes {% endblock title %} 
+
+{% block mainpage %}
+<h2>Enviar mensaje a {{ destinatario.username }}</h2>
+  <form method="post" action="{% url 'mensajes:enviar_mensaje' destinatario_username=destinatario.username %}">
+    {% csrf_token %}
+    <label for="contenido">Contenido:</label>
+    <textarea name="contenido" cols="40" rows="10" required></textarea>
+    <br>
+    <button type="submit">Enviar mensaje</button>
+  </form>
+{% endblock mainpage %}

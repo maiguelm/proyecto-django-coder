@@ -19,14 +19,14 @@ Detalles de Vinos: {{vino.id}}
     <li>Descripcion: {{vino.descripcion | safe }}</li>
     <li>
         {% if vino.imagen %}
-        Imagen: <img class='imagen_form' src={{vino.imagen.url}} alt="Imagen de vino"></img></li>
+        Imagen: <img class='imagen_form' src={{vino.imagen.url}} alt="Imagen de vino"></img>
         {% else %}
         Imagen: No hay imagen cargada
         {% endif %}
-    
+    </li>
     <li>
         {% if vino.fecha_compra %}
-        Fecha de compra: {{vino.fecha_compra | date:'d-m-Y'}}</li>
+        Fecha de compra: {{vino.fecha_compra | date:'d-m-Y'}}
         {% else %}
         Fecha de Compra: Sin datos
         {% endif %}

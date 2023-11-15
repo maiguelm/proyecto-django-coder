@@ -9,7 +9,7 @@ Los Whiskys
 {% block mainpage %}
 
 <section class="page-section" id="whiskies"> 
-	<form class='formulario' action={% url "whiskies" %} method='POST'>
+	<form class='formulario' action={% url "whiskies" %} method='POST' enctype='multipart/form-data'>
 		{% csrf_token %}
 		
 		{{form}}

@@ -1,0 +1,10 @@
+{% extends "base.html" %} 
+{% block masthead %}{% endblock masthead %} 
+{% block title %} Ver conversacion {% endblock title %} 
+
+{% block mainpage %}
+<h1>Conversación con {{ destinatario.username }}</h1>
+{% for mensaje in conversacion %}
+    <p>{{ mensaje.remitente.username }} dijo: {{ mensaje.contenido }}</p>
+{% endfor %}
+{% endblock mainpage %}

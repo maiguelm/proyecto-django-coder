@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'proyectomoyano',
     'whiskies',
     'accounts',
+    'mensajes',
     'ckeditor'
 ]
 
