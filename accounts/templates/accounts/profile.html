@@ -18,6 +18,19 @@
 	{% endif %}
 	<p>Fecha de registro: {{ user_profile.user.date_joined | date:"d-m-Y, g:iA" }}</p>
 
+	<div class="div_mensajes">
+	  <h3><a class='link-special' href="{% url 'mensajes:ver_todos_los_mensajes' %}">Ver Todos los Mensajes</a></h3>
+	  
+	  
+	  <h3>Enviar Mensaje</h2>
+	  <form method="POST" action="{% url 'profile' pk=request.user.id %}">
+		  {% csrf_token %}
+		  {{ form.destinatario.label_tag }} {{ form.destinatario }}
+		  {{ form.contenido.label_tag }} {{ form.contenido }}
+		  <button type="submit">Enviar Mensaje</button>
+		</form>
+	</div>
+	
 <h3>Últimos 8 Mensajes</h3>
   <ul>
     {% for mensaje in ultimos_mensajes %}
@@ -25,24 +38,8 @@
     {% endfor %}
   </ul>
 
-{% for destinatario in destinatarios %}
-	<a href="{% url 'mensajes:ver_conversacion' destinatario_id=user_profile.user.id %}">Ver Conversación con {{ user_profile.user.username }}</a>
-{% endfor %}
-
-
-  <h3><a class='link-special' href="{% url 'mensajes:ver_todos_los_mensajes' %}">Ver Todos los Mensajes</a></h3>
-
-
-
-  <h2>Enviar Mensaje</h2>
-  <form method="POST" action="{% url 'profile' pk=request.user.id %}">
-	  {% csrf_token %}
-	  {{ form.destinatario.label_tag }} {{ form.destinatario }}
-	  {{ form.contenido.label_tag }} {{ form.contenido }}
-	  <button type="submit">Enviar Mensaje</button>
-  </form>
-
-  <p>Haga click <a class='link-special' href={% url "edit_user" pk=user.id %} >aqui</a> para editar sus datos</p>
+	
+	<p>Haga click <a class='link-special' href={% url "edit_user" pk=user.id %} >aqui</a> para editar sus datos</p>
 </section>
 
 {% endblock mainpage %}

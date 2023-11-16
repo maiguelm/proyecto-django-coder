@@ -4,14 +4,16 @@
 
 {% block mainpage %}
 <div class="about">
-  <p>
-    Este sitio ha sido creado por Miguel Angel Moyano como proyecto final del
-    curso de Python en CoderHouse
-  </p>
-  <p>
-    Haga click
-    <a class='link-special' href="https://github.com/maiguelm/proyecto-django-coder">aqui</a> para
-    acceder al repositorio en GitHub
-  </p>
+  <h2>Mensajes recibidos</h2>
+  <ul>
+{% for mensajes in mensajes_recibidos %}
+    <li>{{ mensajes.fecha_creacion }} - {{mensajes.remitente}} - {{mensajes.contenido}}</li>
+{% endfor %}
+  <h2>Mensajes enviados</h2>
+{% for mensajes in mensajes_recibidos %}
+    <li>{{ mensajes.fecha_creacion }} - {{mensajes.destinatario}} - {{mensajes.contenido}}</li>
+{% endfor %}
+
+  </ul>
 </div>
 {% endblock mainpage %}

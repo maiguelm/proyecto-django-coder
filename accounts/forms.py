@@ -1,4 +1,3 @@
-from dataclasses import fields
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
@@ -32,9 +31,3 @@ class UserEdit(UserChangeForm):
         super(UserEdit, self).__init__(*args, **kwargs)
         self.fields.pop('password')
         
-class MensajeForm(forms.Form):
-    destinatario = forms.ModelChoiceField(queryset=User.objects.all(), empty_label=None)
-    contenido = forms.CharField(widget=forms.Textarea(attrs={'placeholder': 'Escribe tu mensaje aquí'}))
-    class Meta:
-        model = Mensaje
-        fields = ['destinatario', 'contenido']

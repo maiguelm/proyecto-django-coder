@@ -5,6 +5,10 @@
 {% block mainpage %}
 <h1>Conversación con {{ destinatario.username }}</h1>
 {% for mensaje in conversacion %}
-    <p>{{ mensaje.remitente.username }} dijo: {{ mensaje.contenido }}</p>
+    {% if mensaje.remitente == request.user %}
+        <p>Tú dijiste: {{ mensaje.contenido }} - {{mensaje.fecha_creacion | date:"d-m-Y, g:iA" }}</p>
+    {% else %}
+        <p>{{ destinatario.username }} dijo: {{ mensaje.contenido }} - {{mensaje.fecha_creacion | date:"d-m-Y, g:iA" }}</p>
+    {% endif %}
 {% endfor %}
 {% endblock mainpage %}

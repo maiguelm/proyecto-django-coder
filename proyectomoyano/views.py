@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
-from django.db.models import Q
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.edit import  UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin

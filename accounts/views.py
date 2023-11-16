@@ -10,10 +10,10 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
-from accounts.forms import UserRegister, UserEdit, MensajeForm
+from accounts.forms import UserRegister, UserEdit
 from accounts.models import UserProfile
 from mensajes.models import Mensaje
-
+from mensajes.forms import MensajeForm
 
 def login(request):
     
@@ -48,14 +48,6 @@ def register(request):
     
     return render(request, 'accounts/register.html', {'form':formulario})
 
-# class Profile(DetailView):
-#     model = UserProfile()
-#     template_name = "accounts/profile.html"
-#     context_object_name = 'user_profile'
-    
-#     def get_object(self, queryset=None):
-#         return UserProfile.objects.get(user=self.request.user)
-
 @method_decorator(login_required, name='dispatch')
 class Profile(View):
     template_name = 'accounts/profile.html'
@@ -63,7 +55,7 @@ class Profile(View):
     def get(self, request, *args, **kwargs):
         user_profile, created = UserProfile.objects.get_or_create(user=request.user)
         ultimos_mensajes = Mensaje.objects.all().order_by('-fecha_creacion')[:8]
-        form = MensajeForm()  # Inicializar el formulario vacío
+        form = MensajeForm()  
 
         context = {'user_profile': user_profile, 'ultimos_mensajes': ultimos_mensajes, 'form': form}
         return render(request, self.template_name, context)
@@ -79,25 +71,14 @@ class Profile(View):
 
             mensaje = Mensaje.objects.create(contenido=contenido, remitente=remitente, destinatario=destinatario)
 
-            # Obtener los últimos mensajes después de crear el nuevo mensaje
             ultimos_mensajes = Mensaje.objects.filter(destinatario=request.user).order_by('-fecha_creacion')[:8]
 
             return HttpResponseRedirect(reverse('profile', kwargs={'pk': request.user.id}))
 
-        # Si el formulario no es válido, actualiza el contexto y renderiza la página
         context = {'user_profile': user_profile, 'form': form}
         return render(request, self.template_name, context)
        
-    
-# def editUser(request, pk):
-#     form = UserEdit(instance=request.user)
-#     if request.method == 'POST':
-#         form = UserRegister(request.POST, instance=request.user)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('edit_user')
-    
-#     return render(request, "accounts/edit_user.html", {'form': form})
+
 
 def editUser(request, pk):
     user_extra = request.user.userprofile

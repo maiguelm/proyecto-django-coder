@@ -24,7 +24,12 @@ Buscá tu vino!!
             {% else %}
             <img src="" alt=""></img>
             {% endif %} - 
-            {{ vino.etiqueta }} {{ vino.varietal }} - {{ vino.cosecha }} <a class='link-special' href="{% url 'delete_wines' vino.id %}">Eliminar</a> - <a class='link-special' href="{% url 'update_wine' vino.id %}">Actualizar</a> - <a class='link-special' href="{% url 'detail_wine' vino.id %}">Descripcion</a>
+            {{ vino.etiqueta }} {{ vino.varietal }} - {{ vino.cosecha }} 
+            {% if request.user.is_authenticated %}
+            <a class='link-special anchor-a' href="{% url 'delete_wines' vino.id %}" onclick=userIsLoggedIn()>Eliminar</a> - 
+            <a class='link-special anchor-b' href="{% url 'update_wine' vino.id %}" onclick="return userIsLoggedIn()">Actualizar</a> - 
+            {% endif %}
+            <a class='link-special' href="{% url 'detail_wine' vino.id %}">Descripcion</a>
         </li>
         {% endfor %}
     </ul>
@@ -37,5 +42,7 @@ Buscá tu vino!!
 {% if  request.user.is_authenticated %}
 	<p>Si querés dejarnos tu opinión sobre un vino en particular, hacé click <span><a class='link-special' href={% url "wines" %}>acá!</a></span></p>
 {% endif %}
+
+
 {% endblock mainpage %}
 
