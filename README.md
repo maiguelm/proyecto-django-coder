@@ -10,3 +10,7 @@ A los efectos de probar la consulta, se debe ingresar a la url de vinos ("busque
 Hay un chat general donde los usuarios pueden dejar mensajes.-
 
 No he incluido un avatar en la pantalla de inicio; pero el usuario puede cargar una imagen de usuario y verla desde su perfil.
+
+
+enlaces de los videos: https://www.dropbox.com/scl/fi/qo36509sfxnge6gfu1hir/2023-11-16-19-25-07.mkv?rlkey=tg2dlaf9xkrjsatgobl8f1jln&dl=0
+https://www.dropbox.com/scl/fi/1w00jufg3o51tbfvvl5m4/2023-11-16-19-34-12.mkv?rlkey=gvlev3ftpf6o347xo3y4qh1cy&dl=0
