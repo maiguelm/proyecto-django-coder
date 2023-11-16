@@ -41,5 +41,5 @@ class DetailWhisky(DetailView):
 
 class DeleteWhisky(LoginRequiredMixin, DeleteView):
     model = Whisky
-    template_name = "whiskies/delete_wiskies.html"
+    template_name = "whiskies/delete_whiskies.html"
     success_url = reverse_lazy('find_whisky')
