@@ -15,7 +15,7 @@ class Whiskies(ListView):
     def get_queryset(self):
         etiqueta = self.request.GET.get('etiqueta', '')
         if etiqueta:
-            listado_de_whisky = self.model.objects.filter(marca__icontains=etiqueta)
+            listado_de_whisky = self.model.objects.filter(etiqueta__icontains=etiqueta)
         else:
             listado_de_whisky = self.model.objects.all()
         return listado_de_whisky

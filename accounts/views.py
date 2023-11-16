@@ -108,4 +108,7 @@ def editUser(request, pk):
 
 class ChangePassword(PasswordChangeView):
    template_name= 'accounts/change_password.html'
-   success_url: reverse_lazy('password_change_done')
+   
+   def get_success_url(self):
+       user = self.request.user
+       return reverse_lazy('profile', kwargs={'pk': user.pk})

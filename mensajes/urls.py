@@ -1,5 +1,5 @@
 from django.urls import path
-from mensajes.views import ver_todos_los_mensajes, lista_mensajes 
+from mensajes.views import ver_todos_los_mensajes 
 
 app_name = 'mensajes'
 
