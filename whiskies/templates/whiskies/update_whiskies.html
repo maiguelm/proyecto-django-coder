@@ -10,12 +10,15 @@ Actualizar Whisky
 
 <h2>Actualice los datos del Whisky seleccionado</h2>
 
-<form action="" method="POST" enctype='multipart/form-data'>
+<section class="page-section" id="whiskies"> 
+
+<form class='formulario' action="" method='POST' enctype='multipart/form-data'>
     {% csrf_token %}
     {{form}}
     <input type="submit" value="Actualizar">
 </form>
 
+</section>
 
 {% endblock mainpage %}
 
